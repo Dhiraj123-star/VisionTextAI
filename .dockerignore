@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtual environments
+venv/
+.env
+.env.*
+
+# Tests & docs (if not needed in image)
+tests/
+docs/
+
+# Logs & temp
+*.log
+*.tmp
+
+# IDEs & configs
+.vscode/
+.idea/
+*.swp
+
+# Build artifacts
+dist/
+build/
