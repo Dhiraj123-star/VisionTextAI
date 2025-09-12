@@ -3,6 +3,7 @@
 
 VisionTextAI is a simple **FastAPI application** that allows users to upload **images or PDFs** and extract text using **GPT-4o-mini OCR**.
 It also provides a **summarized explanation** of the extracted content in **easy-to-understand language**.
+Now includes **Docker support** for containerized deployments.
 
 ---
 
@@ -14,6 +15,7 @@ It also provides a **summarized explanation** of the extracted content in **easy
 * 📝 **Summarization** – Simplifies the extracted content so end-users can understand it easily.
 * 🌐 **Swagger UI** – Upload and test files directly via interactive API docs.
 * 🔒 **.env support** – API key is securely managed via environment variables.
+* 🐳 **Docker Support** – Easily run the app in a container.
 
 ---
 
@@ -48,7 +50,7 @@ Create a `.env` file in the project root:
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-### 5. Run the application
+### 5. Run the application locally
 
 ```bash
 uvicorn main:app --reload
@@ -56,11 +58,27 @@ uvicorn main:app --reload
 
 ---
 
-## 📖 Usage
+## 🐳 Running with Docker
 
-Open your browser and go to:
+### 1. Build the image
+
+```bash
+docker build -t visiontextai .
+```
+
+### 2. Run the container
+
+```bash
+docker run -d --name visiontextai -p 8000:8000 --env-file .env visiontextai
+```
+
+### 3. Access the API
 
 👉 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+---
+
+## 📖 Usage
 
 * Use the `/extract-text/` endpoint.
 * Upload an **image (PNG/JPEG)** or **PDF**.
@@ -79,6 +97,7 @@ Open your browser and go to:
 * [PyPDF2](https://pypi.org/project/pypdf2/) – Extract embedded PDF text
 * [pdf2image](https://pypi.org/project/pdf2image/) – Convert PDF pages to images for OCR
 * [Pillow (PIL)](https://pillow.readthedocs.io/) – Image processing
+* [Docker](https://www.docker.com/) – Containerization
 
 ---
 
