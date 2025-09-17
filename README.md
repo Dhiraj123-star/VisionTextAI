@@ -1,103 +1,57 @@
 
 # VisionTextAI
 
-VisionTextAI is a simple **FastAPI application** that allows users to upload **images or PDFs** and extract text using **GPT-4o-mini OCR**.
+VisionTextAI is a **FastAPI application** that allows users to upload **images or PDFs** and extract text using **GPT-4o-mini OCR**.
 It also provides a **summarized explanation** of the extracted content in **easy-to-understand language**.
-Now includes **Docker support** for containerized deployments.
+Now includes **Docker support** and **CI/CD pipelines** for automated deployments.
 
 ---
 
 ## ✨ Features
 
 * 📷 **Image OCR** – Extracts text from uploaded PNG/JPEG images.
-* 📄 **PDF OCR** – Extracts embedded text from PDFs and performs OCR on image-only pages.
-* ⚡ **Hybrid Strategy** – Uses embedded text first, then OCR only if needed (faster + efficient).
-* 📝 **Summarization** – Simplifies the extracted content so end-users can understand it easily.
-* 🌐 **Swagger UI** – Upload and test files directly via interactive API docs.
-* 🔒 **.env support** – API key is securely managed via environment variables.
-* 🐳 **Docker Support** – Easily run the app in a container.
+* 📄 **PDF OCR** – Hybrid extraction (embedded text + OCR on image-only pages).
+* 📝 **Summarization** – Simplifies extracted content for end-users.
+* 🌐 **Swagger UI** – Upload and test files interactively.
+* 🔒 **.env support** – API key securely managed via environment variables.
+* 🐳 **Docker Support** – Run the app in a container.
+* ⚙️ **CI/CD with GitHub Actions** – Automatically builds & pushes Docker images to Docker Hub.
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+### 1. Local Setup
 
 ```bash
 git clone https://github.com/Dhiraj123-star/VisionTextAI.git
 cd VisionTextAI
-```
-
-### 2. Create and activate a virtual environment
-
-```bash
 python -m venv venv
-source venv/bin/activate   # Linux / macOS
-venv\Scripts\activate      # Windows
-```
-
-### 3. Install dependencies
-
-```bash
+source venv/bin/activate   # Linux/macOS
 pip install -r requirements.txt
-```
-
-### 4. Set up environment variables
-
-Create a `.env` file in the project root:
-
-```
-OPENAI_API_KEY=your_openai_api_key_here
-```
-
-### 5. Run the application locally
-
-```bash
 uvicorn main:app --reload
 ```
 
+Access: 👉 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
 ---
 
-## 🐳 Running with Docker
-
-### 1. Build the image
+### 2. Docker Setup
 
 ```bash
 docker build -t visiontextai .
-```
-
-### 2. Run the container
-
-```bash
 docker run -d --name visiontextai -p 8000:8000 --env-file .env visiontextai
 ```
 
-### 3. Access the API
-
-👉 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-
 ---
 
-## 📖 Usage
+### 3. CI/CD (GitHub Actions)
 
-* Use the `/extract-text/` endpoint.
-* Upload an **image (PNG/JPEG)** or **PDF**.
-* Get JSON response with:
+* On **git push**, GitHub Actions will:
 
-  * `filename` → original file name
-  * `extracted_text` → raw OCR + extracted text
-  * `summary` → simplified explanation of content
-
----
-
-## 🛠 Tech Stack
-
-* [FastAPI](https://fastapi.tiangolo.com/) – Web framework
-* [OpenAI GPT-4o-mini](https://platform.openai.com/) – OCR & Summarization
-* [PyPDF2](https://pypi.org/project/pypdf2/) – Extract embedded PDF text
-* [pdf2image](https://pypi.org/project/pdf2image/) – Convert PDF pages to images for OCR
-* [Pillow (PIL)](https://pillow.readthedocs.io/) – Image processing
-* [Docker](https://www.docker.com/) – Containerization
+  1. Build the Docker image
+  2. Push it to Docker Hub → `dhiraj918106/visiontextai`
+  3. Keep your deployments up-to-date automatically
 
 ---
 
